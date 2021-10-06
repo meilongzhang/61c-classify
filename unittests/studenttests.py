@@ -152,7 +152,50 @@ class TestSquaredLoss(TestCase):
         t.check_scalar("a0", 27)
         # generate the `assembly/TestSquaredLoss_test_simple.s` file and run it through venus
         t.execute()
+        
+    def test_neg(self):
+        # load the test for squared_loss.s
+        t = AssemblyTest(self, "squared_loss.s")
+        # create input arrays in the data section
+        array1 = t.array([-1, -3, -5])
+        array2 = t.array([-2, -4, 0])
+        # load array addresses into argument registers
+        t.input_array("a0", array1)
+        t.input_array("a1", array2)
+        # load array length into argument register
+        t.input_scalar("a2", len(array1))
+        # create a result array in the data section (fill values with -1)
+        array3 = t.array([-1, -1, -1])
+        # load result array address into argument register
+        t.input_array("a3", array3)
+        # call the `squared_loss` function
+        t.call("squared_loss")
+        # check that the result array contains the correct output
+        t.check_array(array3, [1, 1, 25])
+        # check that the register a0 contains the correct output
+        t.check_scalar("a0", 27)
+        # generate the `assembly/TestSquaredLoss_test_simple.s` file and run it through venus
+        t.execute()
 
+    def test_empty(self):
+        # load the test for squared_loss.s
+        t = AssemblyTest(self, "squared_loss.s")
+        # create input arrays in the data section
+        array1 = t.array([])
+        array2 = t.array([])
+        # load array addresses into argument registers
+        t.input_array("a0", array1)
+        t.input_array("a1", array2)
+        # load array length into argument register
+        t.input_scalar("a2", len(array1))
+        # create a result array in the data section (fill values with -1)
+        array3 = t.array([])
+        # load result array address into argument register
+        t.input_array("a3", array3)
+        # call the `squared_loss` function
+        t.call("squared_loss")
+        # generate the `assembly/TestSquaredLoss_test_simple.s` file and run it through venus
+        t.execute(code=123)
 
     @classmethod
     def tearDownClass(cls):
@@ -199,27 +242,47 @@ class TestZeroOneLoss(TestCase):
         # generate the `assembly/TestZeroOneLoss_test_simple.s` file and run it through venus
         t.execute()
         
-	def test_simple(self):
+    def test_neg(self):
         # load the test for zero_one_loss.s
         t = AssemblyTest(self, "zero_one_loss.s")
         # create input arrays in the data section
         array1 = t.array([-1, -2])
-        array2 = t.array([2, 2])
+        array2 = t.array([-1, 2])
         # load array addresses into argument registers
         t.input_array("a0", array1)
         t.input_array("a1", array2)
         # load array length into argument register
         t.input_scalar("a2", len(array1))
         # create a result array in the data section (fill values with -1)
-        array3 = t.array([-1, -1, -1, -1])
+        array3 = t.array([-1, -1])
         # load result array address into argument register
         t.input_array("a3", array3)
         # call the `zero_one_loss` function
         t.call("zero_one_loss")
         # check that the result array contains the correct output
-        t.check_array(array3, [0, 1, 0, 1])
+        t.check_array(array3, [1, 0])
         # generate the `assembly/TestZeroOneLoss_test_simple.s` file and run it through venus
         t.execute()
+        
+    def test_empty(self):
+        # load the test for zero_one_loss.s
+        t = AssemblyTest(self, "zero_one_loss.s")
+        # create input arrays in the data section
+        array1 = t.array([])
+        array2 = t.array([])
+        # load array addresses into argument registers
+        t.input_array("a0", array1)
+        t.input_array("a1", array2)
+        # load array length into argument register
+        t.input_scalar("a2", len(array1))
+        # create a result array in the data section (fill values with -1)
+        array3 = t.array([])
+        # load result array address into argument register
+        t.input_array("a3", array3)
+        # call the `zero_one_loss` function
+        t.call("zero_one_loss")
+        # generate the `assembly/TestZeroOneLoss_test_simple.s` file and run it through venus
+        t.execute(code=123)
     @classmethod
     def tearDownClass(cls):
         print_coverage("zero_one_loss.s", verbose = False)
