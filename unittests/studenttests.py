@@ -56,7 +56,7 @@ class TestAbsLoss(TestCase):
         # generate the `assembly/TestAbsLoss_test_simple.s` file and run it through venus
         t.execute()
         
-	def test_neg(self):
+    def test_neg(self):
         # load the test for abs_loss.s
         t = AssemblyTest(self, "abs_loss.s")
         # create array0 in the data section
@@ -82,7 +82,7 @@ class TestAbsLoss(TestCase):
         # generate the `assembly/TestAbsLoss_test_simple.s` file and run it through venus
         t.execute()
         
-	def test_empty(self):
+    def test_empty(self):
         # load the test for abs_loss.s
         t = AssemblyTest(self, "abs_loss.s")
         # create array0 in the data section
@@ -103,6 +103,7 @@ class TestAbsLoss(TestCase):
         t.call("abs_loss")
         # generate the `assembly/TestAbsLoss_test_simple.s` file and run it through venus
         t.execute(code=123)
+        
     @classmethod
     def tearDownClass(cls):
         print_coverage("abs_loss.s", verbose = False)
