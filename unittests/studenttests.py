@@ -76,7 +76,7 @@ class TestAbsLoss(TestCase):
         # call the `abs_loss` function
         t.call("abs_loss")
         # check that the result array contains the correct output
-        t.check_array(array2, [5. 0])
+        t.check_array(array2, [5, 0])
         # check that the register a0 contains the correct output
         t.check_scalar("a0", 5)
         # generate the `assembly/TestAbsLoss_test_simple.s` file and run it through venus
