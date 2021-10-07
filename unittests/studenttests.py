@@ -330,7 +330,7 @@ class TestInitializeZero(TestCase):
         t = AssemblyTest(self, "initialize_zero.s")
 
         # input the length of the desired array
-        length = 2**32 - 1
+        length = 2**31 - 1
         t.input_scalar("a0", length)
         # call the `initialize_zero` function
         t.call("initialize_zero")
