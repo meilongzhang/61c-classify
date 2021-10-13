@@ -253,7 +253,7 @@ noprint:
     lw a0, 4(sp)
     jal ra, free
     lw a0, 8(sp)
-    #jal ra, free
+    jal ra, free
     add a0, s0, x0
     jal ra, free
     add a0, s1, x0
