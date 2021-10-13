@@ -107,7 +107,7 @@ inner_loop_start:
 
 
 
-ebreak
+
 inner_loop_end:
 	addi t0, t0, 1
     lw a0, 0(sp)
